@@ -1,0 +1,75 @@
+.signup-container {
+    -fx-background-color: #F8F9FA; /* Light gray background */
+    -fx-pref-width: 400px;
+    -fx-alignment: center;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0, 0, 0);
+}
+
+.input-label {
+    -fx-text-fill: #333333; /* Dark gray text for labels */
+    -fx-font-size: 14px;
+}
+
+.text-field {
+    -fx-background-color: #E9ECEF; /* Lighter gray for text fields */
+    -fx-text-fill: #495057; /* Dark gray text */
+    -fx-prompt-text-fill: #6C757D; /* Medium gray for prompt text */
+    -fx-background-radius: 8px;
+    -fx-padding: 12px;
+    -fx-pref-height: 40px;
+    -fx-border-color: #CED4DA; /* Subtle border */
+    -fx-border-radius: 8px;
+}
+
+.hint-text {
+    -fx-text-fill: #6C757D; /* Medium gray for hints */
+    -fx-font-size: 12px;
+}
+
+.text {
+    -fx-text-fill: #333333; /* Dark gray for general text */
+}
+
+.hyperlink {
+    -fx-text-fill: #007BFF; /* Blue for hyperlinks */
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+}
+
+.status-label {
+    -fx-text-fill: #D9534F; /* Red for status messages */
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-padding: 8px 16px;
+    -fx-background-color: rgba(217, 83, 79, 0.1); /* Subtle red background */
+    -fx-background-radius: 8px;
+    -fx-border-color: rgba(217, 83, 79, 0.3); /* Subtle border */
+    -fx-border-radius: 8px;
+    -fx-effect: dropshadow(gaussian, rgba(217, 83, 79, 0.2), 4, 0, 0, 1);
+    -fx-opacity: 0;
+}
+
+.db_btn {
+    -fx-background-color: #28A745; /* Green for buttons */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 12px 24px;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+    -fx-min-width: 200px;
+    -fx-min-height: 45px;
+}
+
+.db_btn:hover {
+    -fx-background-color: #218838; /* Darker green on hover */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 6, 0, 0, 3);
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+}
+
+.db_btn:pressed {
+    -fx-background-color: #1E7E34; /* Dark green when pressed */
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+}

@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="about-pane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TextArea layoutX="6.0" layoutY="51.0" prefHeight="343.0" prefWidth="584.0" text="Your text goes here " wrapText="true">
-         <font>
-            <Font name="System Bold" size="16.0" />
-         </font>
-      </TextArea>
-      <Label alignment="TOP_LEFT" layoutX="8.0" layoutY="11.0" prefHeight="44.0" prefWidth="542.0" text="Developer: MM mM">
-         <font>
-            <Font name="System Bold" size="26.0" />
-         </font>
+      <Label alignment="TOP_LEFT" layoutX="20.0" layoutY="20.0" prefHeight="50.00" prefWidth="560.0" styleClass="about-title" text="Student cookie management">
       </Label>
+      <VBox layoutX="20.0" layoutY="70.0" prefHeight="310.0" prefWidth="560.0" styleClass="about-text-area" spacing="10">
+         <padding>
+            <Insets top="10" right="10" bottom="10" left="10"/>
+         </padding>
+         <children>
+            <Label text="This is a Student Cookies Database " wrapText="true"/>
+            <Label text="Key Features: Easy to Use/ Straight to the point" style="-fx-font-weight: bold;"/>
+            <Label text="• Gets Data from any students of all backgrounds." />
+            <Label text="• CSV import/export functionality." />
+            <Label text="• Has light and dark themes." />
+            <Label text="• Build by Software Engineers" wrapText="true"/>
+            <Label text="Version: 1.0" style="-fx-font-weight: bold;"/>
+            <Label text="Developer: Samuel Jean" style="-fx-font-weight: bold;"/>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

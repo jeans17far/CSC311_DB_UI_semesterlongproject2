@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -16,137 +20,99 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="920.0" styleClass="anchor_pane" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewmodel.DB_GUI_Controller">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="920.0" style="-fx-background-color: #F8F9FA;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewmodel.DB_GUI_Controller">
     <children>
-        <BorderPane fx:id="borderPane" layoutX="-2.0" layoutY="-3.0" prefHeight="597.0" prefWidth="908.0">
+        <BorderPane fx:id="borderPane" layoutX="-2.0" layoutY="-3.0" prefHeight="597.0" prefWidth="950.0">
             <top>
-                <MenuBar fx:id="menuBar" prefHeight="28.0" prefWidth="913.0" styleClass="menu_bar" BorderPane.alignment="CENTER">
+                <MenuBar fx:id="menuBar" prefHeight="28.0" prefWidth="913.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
                     <menus>
-                        <Menu mnemonicParsing="false" styleClass="menu_options" text="File">
+                        <Menu mnemonicParsing="false" style="-fx-text-fill: #333333;" text="File">
                             <items>
-                                <MenuItem fx:id="newItem" mnemonicParsing="false" onAction="#addRecord" styleClass="menu_items" text="New" />
-                                <MenuItem fx:id="ChangePic" mnemonicParsing="false" onAction="#showImage" styleClass="menu_items" text="Change Pic" />
-                                <MenuItem fx:id="logOut" mnemonicParsing="false" onAction="#logOut" styleClass="menu_items" text="Log out" />
-                                <MenuItem mnemonicParsing="false" onAction="#closeApplication" styleClass="menu_items" text="Exit Program" />
+                                <MenuItem mnemonicParsing="false" onAction="#displayGrade" text="Generate grade Report" />
+                                <MenuItem fx:id="logOut" mnemonicParsing="false" onAction="#logOut" text="Log out" />
+                                <MenuItem fx:id="importCSVMenuItem" mnemonicParsing="false" onAction="#importCSV" text="Import CSV" />
+                                <MenuItem fx:id="exportCSVMenuItem" mnemonicParsing="false" onAction="#exportCSV" text="Export CSV" />
+                                <MenuItem mnemonicParsing="false" onAction="#closeApplication" text="Exit Program" />
                             </items>
                         </Menu>
-                  <Menu mnemonicParsing="false" styleClass="menu_options" text="Edit">
-                     <items>
-                        <MenuItem fx:id="editItem" mnemonicParsing="true" styleClass="menu_items" text="_Edit       Ctrl+E" />
-                        <MenuItem fx:id="deleteItem" mnemonicParsing="true" styleClass="menu_items" text="_Delete        Ctrl+D" />
-                        <MenuItem fx:id="ClearItem" mnemonicParsing="false" styleClass="menu_items" text="Clea_r        Ctrl+R" />
-                        <MenuItem fx:id="CopyItem" mnemonicParsing="false" styleClass="menu_items" text="_Copy       Ctrl+C" />
-                     </items>
-                  </Menu>
-                        <Menu mnemonicParsing="false" styleClass="menu_options" text="Theme">
+                        <Menu mnemonicParsing="false" style="-fx-text-fill: #333333;" text="Edit">
                             <items>
-                                <MenuItem mnemonicParsing="false" onAction="#lightTheme" styleClass="menu_items" text="LIGHT THEME" />
-                                <MenuItem mnemonicParsing="false" onAction="#darkTheme" styleClass="menu_items" text="DARK THEME" />
+                                <MenuItem fx:id="editItem" accelerator="Ctrl+E" mnemonicParsing="true" onAction="#handleEditShortcut" text="_Edit" />
+                                <MenuItem fx:id="deleteItem" accelerator="Ctrl+D" mnemonicParsing="true" onAction="#handleDeleteShortcut" text="_Delete" />
+                                <MenuItem fx:id="ClearItem" accelerator="Ctrl+R" mnemonicParsing="false" onAction="#handleClearShortcut" text="Clea_r" />
+                                <MenuItem fx:id="CopyItem" accelerator="Ctrl+C" mnemonicParsing="false" onAction="#handleCopyShortcut" text="_Copy" />
                             </items>
                         </Menu>
-                        <Menu mnemonicParsing="false" styleClass="menu_options" text="Help">
+                        <Menu mnemonicParsing="false" style="-fx-text-fill: #333333;" text="Theme">
                             <items>
-                                <MenuItem mnemonicParsing="false" onAction="#displayAbout" styleClass="menu_items" text="Help" />
-                        <MenuItem mnemonicParsing="false" onAction="#displayAbout" styleClass="menu_items" text="About" />
+                                <MenuItem mnemonicParsing="false" onAction="#lightTheme" text="LIGHT THEME" />
+                                <MenuItem mnemonicParsing="false" onAction="#darkTheme" text="DARK THEME" />
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" style="-fx-text-fill: #333333;" text="Help">
+                            <items>
+                                <MenuItem mnemonicParsing="false" onAction="#displayAbout" text="About" />
                             </items>
                         </Menu>
                     </menus>
                 </MenuBar>
             </top>
             <left>
-                <VBox prefHeight="540.0" prefWidth="132.0" styleClass="left_pane" BorderPane.alignment="CENTER">
+                <VBox prefHeight="540.0" prefWidth="132.0" style="-fx-background-color: #E9ECEF;" BorderPane.alignment="CENTER">
                     <children>
                         <AnchorPane prefHeight="215.0" prefWidth="88.0">
                             <children>
-                                <ImageView fx:id="img_view" fitHeight="111.0" fitWidth="122.0" layoutX="10.0" layoutY="11.0" onMouseClicked="#showImage" pickOnBounds="true" preserveRatio="true" styleClass="image_view">
+                                <ImageView fx:id="img_view" fitHeight="180.0" fitWidth="265.0" layoutX="10.0" layoutY="11.0" onMouseClicked="#addImage" pickOnBounds="true" preserveRatio="true">
                                     <image>
                                         <Image url="@../images/profile.png" />
                                     </image>
                                 </ImageView>
+                                <HBox layoutX="2.0" layoutY="191.0" prefHeight="53.0" prefWidth="200.0">
+                                    <children>
+                                        <Button fx:id="addImageBttn" mnemonicParsing="false" onAction="#addImage" prefHeight="26.0" prefWidth="77.0" style="-fx-background-color: #28A745; -fx-text-fill: #FFFFFF;" text="Add Image" />
+                                        <Button fx:id="deleteImageBttn" mnemonicParsing="false" onAction="#deleteIMAGE" style="-fx-background-color: #DC3545; -fx-text-fill: #FFFFFF;" text="Delete Image" />
+                                    </children>
+                                </HBox>
                             </children>
                         </AnchorPane>
                     </children>
                 </VBox>
             </left>
             <bottom>
-                <HBox prefHeight="30.0" prefWidth="892.0" styleClass="admin_section" BorderPane.alignment="CENTER" />
-            </bottom>
-         <right>
-                <VBox prefHeight="540.0" prefWidth="202.0" styleClass="text_field_pane" BorderPane.alignment="CENTER">
+                <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="892.0" style="-fx-background-color: #E9ECEF;" BorderPane.alignment="CENTER">
                     <children>
-                        <TextField fx:id="first_name" promptText="First Name" styleClass="text_field">
-                            <VBox.margin>
-                                <Insets left="10.0" right="10.0" top="5.0" />
-                            </VBox.margin>
-                        </TextField>
-                        <TextField fx:id="last_name" promptText="Last Name" styleClass="text_field">
-                            <VBox.margin>
-                                <Insets left="10.0" right="10.0" top="5.0" />
-                            </VBox.margin>
-                        </TextField>
-                        <TextField fx:id="department" promptText="Department" styleClass="text_field">
-                            <VBox.margin>
-                                <Insets left="10.0" right="10.0" top="5.0" />
-                            </VBox.margin>
-                        </TextField>
-                        <TextField fx:id="major" promptText="Major" styleClass="text_field">
-                            <VBox.margin>
-                                <Insets left="10.0" right="10.0" top="5.0" />
-                            </VBox.margin>
-                        </TextField>
-                        <TextField fx:id="email" promptText="Email" styleClass="text_field">
-                            <VBox.margin>
-                                <Insets left="10.0" right="10.0" top="5.0" />
-                            </VBox.margin>
-                        </TextField>
-                        <TextField fx:id="imageURL" promptText="imageURL" styleClass="text_field">
-                            <VBox.margin>
-                                <Insets left="10.0" right="10.0" top="5.0" />
-                            </VBox.margin>
-                        </TextField>
-                  <Label prefHeight="6.0" prefWidth="3.0" text=" ">
-                     <VBox.margin>
-                        <Insets bottom="40.0" right="20.0" top="40.0" />
-                     </VBox.margin>
-                  </Label>
-                        <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#clearForm" styleClass="db_btn" text="Clear">
-                            <VBox.margin>
-                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                            </VBox.margin>
-                        </Button>
-                        <Button fx:id="addBtn" mnemonicParsing="false" onAction="#addNewRecord" styleClass="db_btn" text="Add">
-                            <VBox.margin>
-                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                            </VBox.margin>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#deleteRecord" styleClass="db_btn" text="Delete">
-                            <VBox.margin>
-                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                            </VBox.margin>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#editRecord" styleClass="db_btn" text="Edit">
-                            <VBox.margin>
-                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                            </VBox.margin>
-                        </Button>
+                        <ProgressBar fx:id="progressBar" prefHeight="30.0" prefWidth="246.0" progress="0.0" />
+                        <Label fx:id="statusLabel" prefHeight="30.0" prefWidth="253.0" style="-fx-text-fill: #D9534F; -fx-font-weight: bold;" />
+                    </children>
+                </HBox>
+            </bottom>
+            <right>
+                <VBox prefHeight="540.0" prefWidth="202.0" style="-fx-background-color: #F8F9FA;" BorderPane.alignment="CENTER">
+                    <children>
+                        <TextField fx:id="first_name" promptText="First Name" style="-fx-background-color: #FFFFFF; -fx-text-fill: #333333;" />
+                        <TextField fx:id="last_name" promptText="Last Name" style="-fx-background-color: #FFFFFF; -fx-text-fill: #333333;" />
+                        <ComboBox fx:id="gradeComboBox" prefHeight="26.0" prefWidth="209.0" promptText="Select grade" style="-fx-background-color: #FFFFFF;" />
+                        <TextField fx:id="studentCookiehold" promptText="Performance Rating" style="-fx-background-color: #FFFFFF; -fx-text-fill: #333333;" />
+                        <TextField fx:id="email" promptText="Email" style="-fx-background-color: #FFFFFF; -fx-text-fill: #333333;" />
+                        <Button mnemonicParsing="false" onAction="#clearForm" style="-fx-background-color: #FFC107; -fx-text-fill: #333333;" text="Clear" />
+                        <Button fx:id="addBtn" mnemonicParsing="false" onAction="#addNewRecord" style="-fx-background-color: #28A745; -fx-text-fill: #FFFFFF;" text="Add" />
+                        <Button fx:id="deleteBtn" mnemonicParsing="false" onAction="#deleteRecord" style="-fx-background-color: #DC3545; -fx-text-fill: #FFFFFF;" text="Delete" />
+                        <Button fx:id="editBtn" mnemonicParsing="false" onAction="#editRecord" style="-fx-background-color: #007BFF; -fx-text-fill: #FFFFFF;" text="Edit" />
                     </children>
                 </VBox>
-         </right>
-         <center>
-                <TableView fx:id="tv" onMouseClicked="#selectedItemTV" prefHeight="539.0" prefWidth="566.0" styleClass="table_view" BorderPane.alignment="CENTER">
+            </right>
+            <center>
+                <TableView fx:id="tv" onMouseClicked="#selectedItemTV" prefHeight="539.0" prefWidth="566.0" style="-fx-background-color: #FFFFFF;">
                     <columns>
-                        <TableColumn fx:id="tv_id" prefWidth="42.0" styleClass="table_columns" text="ID" />
-                        <TableColumn fx:id="tv_fn" prefWidth="117.0" styleClass="table_columns" text="First Name" />
-                        <TableColumn fx:id="tv_ln" prefWidth="93.0" styleClass="table_columns" text="Last Name" />
-                        <TableColumn fx:id="tv_department" prefWidth="122.0" styleClass="table_columns" text="Department" />
-                        <TableColumn fx:id="tv_major" prefWidth="84.0" styleClass="table_columns" text="Major" />
-                        <TableColumn fx:id="tv_email" prefWidth="111.0" styleClass="table_columns" text="Email" />
+                        <TableColumn fx:id="tv_id" prefWidth="117.0" text="ID" />
+                        <TableColumn fx:id="tv_fn" prefWidth="117.0" text="First Name" />
+                        <TableColumn fx:id="tv_ln" prefWidth="93.0" text="Last Name" />
+                        <TableColumn fx:id="tv_grade" prefWidth="122.0" text="grade" />
+                        <TableColumn fx:id="tv_studentCookiehold" prefWidth="84.0" text="Rating" />
+                        <TableColumn fx:id="tv_email" prefWidth="111.0" text="Email" />
                     </columns>
                 </TableView>
-         </center>
-         <padding>
-            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-         </padding>
+            </center>
         </BorderPane>
     </children>
 </AnchorPane>

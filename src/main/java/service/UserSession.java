@@ -1,66 +1,98 @@
 package service;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.prefs.Preferences;
 
+/**
+ * Singleton class for managing user sessions.
+ */
 public class UserSession {
+    private static volatile UserSession instance;
 
-    private static UserSession instance;
+    private final String username;
+    private final String role;
+    private final Preferences prefs;
 
-    private String userName;
-
-    private String password;
-    private String privileges;
-
-    private UserSession(String userName, String password, String privileges) {
-        this.userName = userName;
-        this.password = password;
-        this.privileges = privileges;
-        Preferences userPreferences = Preferences.userRoot();
-        userPreferences.put("USERNAME",userName);
-        userPreferences.put("PASSWORD",password);
-        userPreferences.put("PRIVILEGES",privileges);
+    /**
+     * Private constructor.
+     * @param username User's username.
+     * @param role     User's role.
+     */
+    private UserSession(String username, String role) {
+        this.username = username;
+        this.role = role;
+        this.prefs = Preferences.userRoot().node(this.getClass().getName());
     }
 
-
-
-    public static UserSession getInstace(String userName,String password, String privileges) {
-        if(instance == null) {
-            instance = new UserSession(userName, password, privileges);
+    /**
+     * Gets the UserSession instance.
+     * @param username User's username.
+     * @param role     User's role.
+     * @return The UserSession instance.
+     */
+    public static synchronized UserSession identifyInstance(String username, String role) {
+        if (instance == null) {
+            instance = new UserSession(username, role);
         }
         return instance;
     }
 
-    public static UserSession getInstace(String userName,String password) {
-        if(instance == null) {
-            instance = new UserSession(userName, password, "NONE");
-        }
-        return instance;
-    }
-    public String getUserName() {
-        return this.userName;
+    /**
+     * Saves user credentials.
+     * @param username User's username.
+     * @param password User's password.
+     */
+    public void saveCredentials(String username, String password) {
+        prefs.put("username", username);
+        prefs.put("password", password);
     }
 
+    /**
+     * Retrieves the username.
+     * @return Saved username.
+     */
+    public String getUsername() {
+        return prefs.get("username", null);
+    }
+
+    /**
+     * Retrieves the password.
+     * @return Saved password.
+     */
     public String getPassword() {
-        return this.password;
+        return prefs.get("password", null);
     }
 
-    public String getPrivileges() {
-        return this.privileges;
+    /**
+     * Clears saved credentials.
+     */
+    public void clearCredentials() {
+        prefs.remove("username");
+        prefs.remove("password");
     }
 
-    public void cleanUserSession() {
-        this.userName = "";// or null
-        this.password = "";
-        this.privileges = "";// or null
+    /**
+     * Gets user role.
+     * @return User role.
+     */
+    public String getRole() {
+        return role;
     }
 
+    /**
+     * Cleans the UserSession.
+     */
+    public static synchronized void cleanUserSession() {
+        if (instance != null) {
+            instance.clearCredentials();
+            instance = null;
+        }
+    }
+
+    /**
+     * Returns UserSession details as a string.
+     */
     @Override
     public String toString() {
-        return "UserSession{" +
-                "userName='" + this.userName + '\'' +
-                ", privileges=" + this.privileges +
-                '}';
+        return "UserSession{username='" + this.username + "', role=" + this.role + '}';
     }
 }
